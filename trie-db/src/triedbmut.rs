@@ -1819,10 +1819,13 @@ where
 		// 	self.db.remove(&hash, (&prefix.0[..], prefix.1));
 		// }
 
-		#[cfg(not(feature = "std"))]
-		for (hash, prefix) in core::mem::take(&mut self.death_row).into_iter() {
-			self.db.remove(&hash, (&prefix.0[..], prefix.1));
-		}
+		// #[cfg(not(feature = "std"))]
+		// for (hash, prefix) in core::mem::take(&mut self.death_row).into_iter() {
+		// 	self.db.remove(&hash, (&prefix.0[..], prefix.1));
+		// }
+
+		trace!(target: "trie", "{:?} nodes to remove from db still", self.death_row.len());
+
 
 		let handle = match self.root_handle() {
 			NodeHandle::Hash(_) => return, // no changes necessary.
