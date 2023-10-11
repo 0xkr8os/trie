@@ -1814,10 +1814,10 @@ where
 		#[cfg(feature = "std")]
 		trace!(target: "trie", "{:?} nodes to remove from db", self.death_row.len());
 
-		#[cfg(feature = "std")]
-		for (hash, prefix) in self.death_row.drain() {
-			self.db.remove(&hash, (&prefix.0[..], prefix.1));
-		}
+		// #[cfg(feature = "std")]
+		// for (hash, prefix) in self.death_row.drain() {
+		// 	self.db.remove(&hash, (&prefix.0[..], prefix.1));
+		// }
 
 		#[cfg(not(feature = "std"))]
 		for (hash, prefix) in core::mem::take(&mut self.death_row).into_iter() {
